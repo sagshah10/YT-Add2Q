@@ -1,0 +1,51 @@
+{
+    "manifest_version": 2,
+    "name": "YT Add to Queue",
+    "version": "1.0",
+    "description": "Automatically Trigger the new YouTube 'Add To Queue' option for videos available on your YouTube Subscriptions page.",
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "addon@example.com",
+            "strict_min_version": "42.0",
+            "strict_max_version": "1000.*",
+            "update_url": "https://example.com/updates.json"
+        }
+    },
+    "icons": {
+        "48": "icons/YT Add2Q Icon_48.png",
+        "32": "icons/YT Add2Q Icon_32.png",
+        "16": "icons/YT Add2Q Icon_16.png"
+    },
+    "browser_action": {
+        "default_icon": "icons/YT Add2Q Icon_48.png",
+        "default_title": "YT Auto Add to Queue"
+    },
+    "options_ui": {
+        "page": "options/options.html",
+        "browser_style": true,
+        "chrome_style": true
+    },
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "contextMenus",
+        "storage"
+    ],
+    "background": {
+        "scripts": [
+            "YTAdd2QBackground.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "run_at": "document_end",
+            "matches": [
+                "*://*.youtube.com/*",
+                "https://www.youtube.com/feed/subscriptions"
+            ],
+            "js": [
+                "YTAddToQueue.js"
+            ]
+        }
+    ]
+}
